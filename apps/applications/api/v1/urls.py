@@ -5,6 +5,7 @@ from apps.applications.api.v1 import viewsets
 
 router = DefaultRouter()
 router.register("plan", viewsets.PlanViewSet, basename="plan")
+router.register("app", viewsets.AppViewSet, basename="app")
 
 urlpatterns = [
     path("", include(router.urls)),
