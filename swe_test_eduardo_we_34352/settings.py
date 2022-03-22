@@ -197,11 +197,11 @@ SOCIALACCOUNT_ALLOW_REGISTRATION = env.bool("SOCIALACCOUNT_ALLOW_REGISTRATION", 
 
 REST_AUTH_SERIALIZERS = {
     # Replace password reset serializer to fix 500 error
-    "PASSWORD_RESET_SERIALIZER": "apps.home.api.v1.serializers.PasswordSerializer",
+    "PASSWORD_RESET_SERIALIZER": "apps.users.api.v1.serializers.PasswordSerializer",
 }
 REST_AUTH_REGISTER_SERIALIZERS = {
     # Use custom serializer that has no username and matches web signup
-    "REGISTER_SERIALIZER": "apps.home.api.v1.serializers.SignupSerializer",
+    "REGISTER_SERIALIZER": "apps.users.api.v1.serializers.SignupSerializer",
 }
 
 # Custom user model
