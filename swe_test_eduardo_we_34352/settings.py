@@ -67,8 +67,8 @@ INSTALLED_APPS = [
     'django.contrib.sites'
 ]
 LOCAL_APPS = [
-    'home',
-    'users.apps.UsersConfig',
+    'apps.home',
+    'apps.users.apps.UsersConfig',
 ]
 THIRD_PARTY_APPS = [
     'rest_framework',
@@ -190,18 +190,18 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_UNIQUE_EMAIL = True
 LOGIN_REDIRECT_URL = "users:redirect"
 
-ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
-SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
+ACCOUNT_ADAPTER = "apps.users.adapters.AccountAdapter"
+SOCIALACCOUNT_ADAPTER = "apps.users.adapters.SocialAccountAdapter"
 ACCOUNT_ALLOW_REGISTRATION = env.bool("ACCOUNT_ALLOW_REGISTRATION", True)
 SOCIALACCOUNT_ALLOW_REGISTRATION = env.bool("SOCIALACCOUNT_ALLOW_REGISTRATION", True)
 
 REST_AUTH_SERIALIZERS = {
     # Replace password reset serializer to fix 500 error
-    "PASSWORD_RESET_SERIALIZER": "home.api.v1.serializers.PasswordSerializer",
+    "PASSWORD_RESET_SERIALIZER": "apps.home.api.v1.serializers.PasswordSerializer",
 }
 REST_AUTH_REGISTER_SERIALIZERS = {
     # Use custom serializer that has no username and matches web signup
-    "REGISTER_SERIALIZER": "home.api.v1.serializers.SignupSerializer",
+    "REGISTER_SERIALIZER": "apps.home.api.v1.serializers.SignupSerializer",
 }
 
 # Custom user model
@@ -234,7 +234,7 @@ if USE_S3:
     AWS_MEDIA_LOCATION = env.str("AWS_MEDIA_LOCATION", "media")
     AWS_AUTO_CREATE_BUCKET = env.bool("AWS_AUTO_CREATE_BUCKET", True)
     DEFAULT_FILE_STORAGE = env.str(
-        "DEFAULT_FILE_STORAGE", "home.storage_backends.MediaStorage"
+        "DEFAULT_FILE_STORAGE", "apps.home.storage_backends.MediaStorage"
     )
     MEDIA_URL = '/mediafiles/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
