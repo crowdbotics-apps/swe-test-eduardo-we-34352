@@ -27,6 +27,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("modules/", include("modules.urls")),
     path("api/v1/users/", include("apps.users.api.v1.urls")),
+    path("api/v1/applications/", include("apps.applications.api.v1.urls")),
     path("admin/", admin.site.urls),
     path("users/", include("apps.users.urls", namespace="users")),
     path("rest-auth/", include("rest_auth.urls")),

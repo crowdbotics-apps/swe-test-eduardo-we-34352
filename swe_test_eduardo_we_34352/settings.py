@@ -69,6 +69,7 @@ INSTALLED_APPS = [
 LOCAL_APPS = [
     'apps.home',
     'apps.users.apps.UsersConfig',
+    'apps.applications',
 ]
 THIRD_PARTY_APPS = [
     'rest_framework',
