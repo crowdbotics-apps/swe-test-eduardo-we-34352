@@ -32,10 +32,4 @@ class SubscriptionViewSet(DefaultAuthConfViewSet, mixins.CreateModelMixin, mixin
 
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
-
-    def update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        if request.data.get('app') and instance.app.id != request.data.get('app'):
-            raise serializers.ValidationError('You can not change the app of a subscription.')
-        return super().update(request, *args, **kwargs)
     

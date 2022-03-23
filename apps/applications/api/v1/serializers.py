@@ -27,6 +27,16 @@ class SubscriptionSerializer(serializers.ModelSerializer):
             'plan': {'required': True},
             'app': {'required': True},
         }
-    
+
     def create(self, validated_data):
+        app = validated_data.get('app')
+        if app.user != self.context['request'].user:
+            raise serializers.ValidationError('You can not create a subscription for an app that you do not own.')
+
         return Subscription.objects.create(user=self.context['request'].user, **validated_data)
+    
+    def update(self, instance, validated_data):
+        if validated_data.get('app') and instance.app.id != validated_data.get('app'):
+            raise serializers.ValidationError('You can not change the app of a subscription.')
+            
+        return super().update(instance, validated_data)
