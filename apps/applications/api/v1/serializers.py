@@ -23,6 +23,10 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         model = Subscription
         fields = ('id', 'user', 'plan', 'app', 'active', 'created_at', 'updated_at')
         read_only_fields = ('user', 'created_at', 'updated_at')
+        extra_kwargs = {
+            'plan': {'required': True},
+            'app': {'required': True},
+        }
     
     def create(self, validated_data):
         return Subscription.objects.create(user=self.context['request'].user, **validated_data)
