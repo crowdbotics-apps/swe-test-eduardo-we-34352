@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
             INSERT INTO applications_plan (name, price, description, created_at, updated_at) VALUES
             ('Free', 0, 'Free plan', now(), now()),
             ('Standard', 10, 'Standard plan', now(), now()),
-            ('Pro', 25, 'Pro plan', now(), now()),
+            ('Pro', 25, 'Pro plan', now(), now());
             """
         )
     ]
