@@ -23,7 +23,7 @@ class AppViewSet(viewsets.ModelViewSet, DefaultAuthConfViewSet):
     serializer_class = AppSerializer
 
     def get_queryset(self):
-        return super().get_queryset().filter(created_by=self.request.user)
+        return super().get_queryset().filter(user=self.request.user)
 
 class SubscriptionViewSet(DefaultAuthConfViewSet, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     permissions_classes = [IsAuthenticated, IsOwner]
@@ -31,4 +31,4 @@ class SubscriptionViewSet(DefaultAuthConfViewSet, mixins.CreateModelMixin, mixin
     serializer_class = SubscriptionSerializer
 
     def get_queryset(self):
-        return super().get_queryset().filter(created_by=self.request.user)
+        return super().get_queryset().filter(user=self.request.user)
