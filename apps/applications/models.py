@@ -25,7 +25,7 @@ class App(models.Model):
         return self.name
 
 class Subscription(models.Model):
-    active = models.BooleanField(default=True)
+    active = models.BooleanField()
     plan = models.ForeignKey('Plan', on_delete=models.CASCADE)
     app = models.OneToOneField('App', on_delete=models.SET_NULL)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
