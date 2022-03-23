@@ -1,10 +1,10 @@
 from rest_framework import mixins, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
-from apps.applications.api.v1.permissions import IsOwner
 
-from apps.applications.api.v1.serializers import AppSerializer, PlanSerializer
-from apps.applications.models import App, Plan
+from apps.applications.api.v1.permissions import IsOwner
+from apps.applications.api.v1.serializers import AppSerializer, PlanSerializer, SubscriptionSerializer
+from apps.applications.models import App, Plan, Subscription
 
 class DefaultAuthConfViewSet(viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated]
@@ -21,6 +21,14 @@ class AppViewSet(viewsets.ModelViewSet, DefaultAuthConfViewSet):
     permissions_classes = [IsAuthenticated, IsOwner]
     queryset = App.objects.all()
     serializer_class = AppSerializer
+
+    def get_queryset(self):
+        return super().get_queryset().filter(created_by=self.request.user)
+
+class SubscriptionViewSet(DefaultAuthConfViewSet, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
+    permissions_classes = [IsAuthenticated, IsOwner]
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer
 
     def get_queryset(self):
         return super().get_queryset().filter(created_by=self.request.user)
