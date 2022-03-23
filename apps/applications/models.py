@@ -28,6 +28,7 @@ class Subscription(models.Model):
     active = models.BooleanField(default=True)
     plan = models.ForeignKey('Plan', on_delete=models.CASCADE)
     app = models.ForeignKey('App', on_delete=models.CASCADE)
+    created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
