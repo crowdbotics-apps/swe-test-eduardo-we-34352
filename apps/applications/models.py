@@ -26,9 +26,9 @@ class App(models.Model):
 
 class Subscription(models.Model):
     active = models.BooleanField()
-    plan = models.ForeignKey('Plan', on_delete=models.CASCADE)
-    app = models.OneToOneField('App', on_delete=models.SET_NULL)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    plan = models.ForeignKey('Plan', on_delete=models.SET_NULL, null=True)
+    app = models.OneToOneField('App', on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
