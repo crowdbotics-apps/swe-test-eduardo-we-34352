@@ -18,7 +18,7 @@ class PlanViewSet(viewsets.ReadOnlyModelViewSet, DefaultAuthConfViewSet):
     serializer_class = PlanSerializer
 
 class AppViewSet(viewsets.ModelViewSet, DefaultAuthConfViewSet):
-    permissions_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner]
     queryset = App.objects.all()
     serializer_class = AppSerializer
 
@@ -26,7 +26,7 @@ class AppViewSet(viewsets.ModelViewSet, DefaultAuthConfViewSet):
         return super().get_queryset().filter(user=self.request.user)
 
 class SubscriptionViewSet(DefaultAuthConfViewSet, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
-    permissions_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner]
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
 
