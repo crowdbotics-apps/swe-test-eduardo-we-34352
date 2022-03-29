@@ -36,7 +36,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         return Subscription.objects.create(user=self.context['request'].user, **validated_data)
     
     def update(self, instance, validated_data):
-        if validated_data.get('app') and instance.app.id != validated_data.get('app'):
+        if validated_data.get('app') and instance.app != validated_data.get('app'):
             raise serializers.ValidationError('You can not change the app of a subscription.')
             
         return super().update(instance, validated_data)
